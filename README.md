@@ -36,9 +36,9 @@ The sensor fusion data received from the simulator in each iteration is parsed a
 
 4. Determine Trajectory
 Using the ego car "planning state" and sensor fusion predictions an optimal trajectory is produced. 
-1. Available states are updated based on the ego car's current position, with some extra assistance from immediate sensor fusion data . 
-2. Each available state is given a target Frenet state (lane position and velocity, and acceleration ) based on the current state and the traffic predictions. 
-3. A jerk-minimizing (JMT) trajectory is produced for each available state and target  using the `spline.h` library).
+4.1  Available states are updated based on the ego car's current position, with some extra assistance from immediate sensor fusion data. 
+4.2  Each available state is given a target Frenet state (lane position and velocity, and acceleration ) based on the current state and the traffic predictions. 
+4.3  A jerk-minimizing (JMT) trajectory is produced for each available state and target  using the `spline.h` library).
 
 5. Produce New Path
 The new path starts with a certain number of points from the previous path, which is received from the simulator at each iteration. From there a spline is generated beginning with the last two points of the previous path that have been kept (or the current position, heading, and velocity if no current path exists), and ending with two points 30 and 60 meters ahead and in the target lane. This produces a smooth x and y trajectory. To prevent excessive acceleration and jerk, the velocity is only allowed increment or decrement by a small amount, and the corresponding next x and y points are calculated along the x and y splines created earlier. 
